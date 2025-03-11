@@ -1,0 +1,54 @@
+name: Backend CI
+
+on:
+  push:
+    branches: [main]
+    paths:
+      - 'backend/**'
+  pull_request:
+    branches: [main]
+
+jobs:
+  build:
+    runs-on: ubuntu-latest
+
+    steps:
+    - uses: actions/checkout@v4
+
+    - name: Set up Ruby
+      uses: ruby/setup-ruby@v1
+      with:
+        ruby-version: 3.2
+        bundler-cache: true
+
+    - name: Install Dependencies
+      working-directory: backend
+      run: |
+        gem install bundler
+        bundle config set force_ruby_platform true
+        bundle config build.sqlite3 --with-opt-dir=/usr/lib/x86_64-linux-gnu/sqlite3
+        bundle install
+
+    - name: Run Brakeman (Security Linter)
+      working-directory: backend
+      run: bundle exec brakeman --no-pager
+
+    - name: Run RuboCop (Style Linter)
+      working-directory: backend
+      run: bundle exec rubocop
+
+    - name: Run Rails Best Practices
+      working-directory: backend
+      run: |
+        gem install rails_best_practices
+        bundle exec rails_best_practices .
+
+    - name: Setup database
+      working-directory: backend
+      run: |
+        bundle exec rails db:create RAILS_ENV=test
+        bundle exec rails db:migrate RAILS_ENV=test
+
+    #- name: Run Tests
+    #  working-directory: backend
+    #  run: bundle exec rails test

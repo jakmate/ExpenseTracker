@@ -1,0 +1,31 @@
+version: '3.8'
+
+services:
+  frontend:
+      build: ./frontend
+      ports:
+        - "5173:5173"
+      volumes:
+        - ./frontend:/app
+        - /app/node_modules
+      depends_on:
+        - backend
+      networks:
+        - app-network
+
+  backend:
+    build: ./backend
+    ports:
+      - "3001:3000"
+    volumes:
+      - ./backend:/app
+      - ./backend/storage:/app/storage
+    environment:
+      - RAILS_ENV=development
+      - DATABASE_URL=sqlite3:storage/development.sqlite3
+    networks:
+      - app-network
+
+networks:
+  app-network:
+    driver: bridge
