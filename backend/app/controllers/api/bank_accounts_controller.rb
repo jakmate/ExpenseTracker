@@ -1,29 +1,33 @@
-class Api::BankAccountsController < ApplicationController
-  skip_before_action :verify_authenticity_token
+# frozen_string_literal: true
 
-  def index
-    @bank_accounts = BankAccount.all
-    render json: @bank_accounts, each_serializer: BankAccountSerializer
-  end
+module Api
+  class BankAccountsController < ApplicationController
+    skip_before_action :verify_authenticity_token
 
-  def create
-    @bank_account = BankAccount.new(bank_account_params)
-    if @bank_account.save
-      render json: @bank_account, status: :created
-    else
-      render json: { errors: @bank_account.errors.full_messages }, status: :unprocessable_entity
+    def index
+      @bank_accounts = BankAccount.all
+      render json: @bank_accounts, each_serializer: BankAccountSerializer
     end
-  end
 
-  private
+    def create
+      @bank_account = BankAccount.new(bank_account_params)
+      if @bank_account.save
+        render json: @bank_account, status: :created
+      else
+        render json: { errors: @bank_account.errors.full_messages }, status: :unprocessable_entity
+      end
+    end
 
-  def bank_account_params
-    params.require(:bank_account).permit(
-      :bank_name,
-      :account_number,
-      :account_type,
-      :balance,
-      :user_id
-    )
+    private
+
+    def bank_account_params
+      params.require(:bank_account).permit(
+        :bank_name,
+        :account_number,
+        :account_type,
+        :balance,
+        :user_id
+      )
+    end
   end
 end

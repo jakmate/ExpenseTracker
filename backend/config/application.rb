@@ -1,3 +1,5 @@
+# frozen_string_literal: true
+
 require_relative "boot"
 
 require "rails/all"
@@ -20,9 +22,9 @@ module Backend
       allow do
         origins "localhost:5173", "127.0.0.1:5173"
         resource "*",
-          headers: :any,
-          methods: [ :get, :post, :put, :patch, :delete, :options, :head ],
-          credentials: false
+                 headers: :any,
+                 methods: %i[get post put patch delete options head],
+                 credentials: false
       end
     end
 

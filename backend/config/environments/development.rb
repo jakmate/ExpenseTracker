@@ -1,3 +1,5 @@
+# frozen_string_literal: true
+
 require "active_support/core_ext/integer/time"
 
 Rails.application.configure do
@@ -71,5 +73,5 @@ Rails.application.configure do
   # config.generators.apply_rubocop_autocorrect_after_generate!
   config.hosts << "localhost"
   config.hosts << "127.0.0.1"
-  config.host_authorization = { exclude: ->(request) { request.path =~ /^\/api/ } }
+  config.host_authorization = { exclude: ->(request) { request.path =~ %r{^/api} } }
 end

@@ -1,3 +1,5 @@
+# frozen_string_literal: true
+
 class ChangeAccountNumberToInteger < ActiveRecord::Migration[8.0]
   def up
     # First add new integer column

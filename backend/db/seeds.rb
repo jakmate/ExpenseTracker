@@ -1,3 +1,5 @@
+# frozen_string_literal: true
+
 # This file should ensure the existence of records required to run the application in every environment (production,
 # development, test). The code here should be idempotent so that it can be executed at any point in every environment.
 # The data can then be loaded with the bin/rails db:seed command (or created alongside the database with db:setup).
@@ -12,28 +14,28 @@ User.destroy_all
 Category.destroy_all
 
 user = User.create!(
-  name: "Demo User",
-  email: "demo@expensetracker.com"
+  name: 'Demo User',
+  email: 'demo@expensetracker.com'
 )
 
 BankAccount.create!([
-  {
-    user: user,
-    bank_name: "National Bank",
-    account_number: "123456789",
-    account_type: "Checking",
-    balance: 5000.00
-  },
-  {
-    user: user,
-    bank_name: "City Savings",
-    account_number: "987654321",
-    account_type: "Savings",
-    balance: 15000.00
-  }
-])
+                      {
+                        user: user,
+                        bank_name: 'National Bank',
+                        account_number: '123456789',
+                        account_type: 'Checking',
+                        balance: 5000.00
+                      },
+                      {
+                        user: user,
+                        bank_name: 'City Savings',
+                        account_number: '987654321',
+                        account_type: 'Savings',
+                        balance: 15_000.00
+                      }
+                    ])
 
-expense_categories = [ 'Groceries', 'Rent', 'Transport', 'Utilities' ]
+expense_categories = %w[Groceries Rent Transport Utilities]
 income_categories = [ 'Salary', 'Freelance', 'Investments', 'Side Projects' ]
 
 expense_categories.each do |name|
