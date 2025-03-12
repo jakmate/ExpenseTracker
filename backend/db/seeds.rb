@@ -19,23 +19,27 @@ user = User.create!(
 )
 
 BankAccount.create!([
-                      {
-                        user: user,
-                        bank_name: 'National Bank',
-                        account_number: '123456789',
-                        account_type: 'Checking',
-                        balance: 5000.00
-                      },
-                      {
-                        user: user,
-                        bank_name: 'City Savings',
-                        account_number: '987654321',
-                        account_type: 'Savings',
-                        balance: 15_000.00
-                      }
-                    ])
+{
+  user: user,
+  bank_name: 'National Bank',
+  account_name: 'Bank Account 1',
+  account_number: '12345678',
+  sortcode: '123456',
+  account_type: 'Checking',
+  balance: 5000.00
+},
+{
+  user: user,
+  bank_name: 'City Savings',
+  account_name: 'Bank Account 2',
+  account_number: '98765432',
+  sortcode: '654321',
+  account_type: 'Savings',
+  balance: 15_000.00
+}
+])
 
-expense_categories = %w[Groceries Rent Transport Utilities]
+expense_categories = [ 'Groceries', 'Rent', 'Transport', 'Utilities' ]
 income_categories = [ 'Salary', 'Freelance', 'Investments', 'Side Projects' ]
 
 expense_categories.each do |name|

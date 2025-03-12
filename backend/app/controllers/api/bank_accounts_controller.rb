@@ -25,6 +25,8 @@ module Api
         :bank_name,
         :account_number,
         :account_type,
+        :account_name,
+        :sortcode,
         :balance,
         :user_id
       )

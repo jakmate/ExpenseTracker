@@ -36,7 +36,7 @@ export function TransactionForm({
       <form className="space-y-4" onSubmit={handleSubmit}>
         <div className="grid grid-cols-1 md:grid-cols-2 gap-4">
           <div>
-            <label className="block text-sm font-medium text-gray-700 mb-1">
+            <label htmlFor='amount' className="block text-sm font-medium text-gray-700 mb-1">
               Amount
             </label>
             <input
@@ -51,7 +51,7 @@ export function TransactionForm({
           </div>
 
           <div>
-            <label className="block text-sm font-medium text-gray-700 mb-1">
+            <label htmlFor='date' className="block text-sm font-medium text-gray-700 mb-1">
               Date
             </label>
             <input
@@ -84,7 +84,7 @@ export function TransactionForm({
         </div>
 
         <div>
-          <label className="block text-sm font-medium text-gray-700 mb-1">
+          <label htmlFor='category_id' className="block text-sm font-medium text-gray-700 mb-1">
             Category
           </label>
           <select
@@ -106,7 +106,7 @@ export function TransactionForm({
         </div>
 
         <div>
-          <label className="block text-sm font-medium text-gray-700 mb-1">
+          <label htmlFor='description' className="block text-sm font-medium text-gray-700 mb-1">
             Description
           </label>
           <input

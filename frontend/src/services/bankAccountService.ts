@@ -11,13 +11,14 @@ export const BankAccountService = {
       body: JSON.stringify({
         bank_account: {
           ...bankAccount,
-          user_id: 1
+          user_id: 2
         }
       }),
     });
 
     if (!response.ok) {
-      throw new Error('Failed to create bank account');
+      const errorData = await response.json();
+      throw new Error(errorData.errors?.join(', ') || 'Failed to create account');
     }
 
     return response.json();
