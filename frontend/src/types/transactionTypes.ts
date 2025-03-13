@@ -1,5 +1,5 @@
-import { BankAccount } from "./bankAccountTypes";
-import { Category } from "./categoryTypes";
+import { BankAccount } from './bankAccountTypes';
+import { Category } from './categoryTypes';
 
 export interface Transaction {
   id: number;
@@ -15,5 +15,5 @@ export interface TransactionFormProps {
   type: 'income' | 'expense';
   categories: Category[];
   bankAccounts: BankAccount[];
-  onSubmit: (data: Omit<Transaction, "id">) => void;
+  onSubmit: (data: Omit<Transaction, 'id'>) => void;
 }

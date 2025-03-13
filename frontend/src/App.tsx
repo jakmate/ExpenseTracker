@@ -1,7 +1,7 @@
-import './App.css'
-import { BrowserRouter } from 'react-router-dom'
-import { Sidebar } from './components/Sidebar'
-import { MainContent } from './components/MainContent'
+import './App.css';
+import { BrowserRouter } from 'react-router-dom';
+import { Sidebar } from './components/Sidebar';
+import { MainContent } from './components/MainContent';
 
 function App() {
   return (
@@ -11,7 +11,7 @@ function App() {
         <MainContent />
       </div>
     </BrowserRouter>
-  )
+  );
 }
 
-export default App
+export default App;

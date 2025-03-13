@@ -7,5 +7,5 @@ class BankAccount < ApplicationRecord
   validates :account_number, presence: true, uniqueness: true
   validates :sortcode, presence: true
   validates :bank_name, presence: true
-  validates :balance, presence: true, numericality: { greater_than_or_equal_to: 0 }
+  validates :balance, presence: true
 end

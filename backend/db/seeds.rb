@@ -12,6 +12,7 @@
 
 User.destroy_all
 Category.destroy_all
+BankAccount.destroy_all
 
 user = User.create!(
   name: 'Demo User',
@@ -21,21 +22,30 @@ user = User.create!(
 BankAccount.create!([
 {
   user: user,
-  bank_name: 'National Bank',
-  account_name: 'Bank Account 1',
+  bank_name: 'Lloyds',
+  account_name: 'Current',
   account_number: '12345678',
   sortcode: '123456',
-  account_type: 'Checking',
-  balance: 5000.00
+  account_type: 'Current',
+  balance: 1000.00
 },
 {
   user: user,
-  bank_name: 'City Savings',
-  account_name: 'Bank Account 2',
+  bank_name: 'Natwest',
+  account_name: 'My Savings',
   account_number: '98765432',
   sortcode: '654321',
   account_type: 'Savings',
   balance: 15_000.00
+},
+{
+  user: user,
+  bank_name: 'Santander',
+  account_name: 'Credit',
+  account_number: '12121212',
+  sortcode: '121212',
+  account_type: 'Credit',
+  balance: -9_000.00
 }
 ])
 

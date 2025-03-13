@@ -1,6 +1,10 @@
 import { useState, useEffect } from 'react';
 import { TransactionForm } from './TransactionForm';
-import { fetchCategories, fetchBankAccounts, createTransaction } from '../services/transactionService';
+import {
+  fetchCategories,
+  fetchBankAccounts,
+  createTransaction,
+} from '../services/transactionService';
 import { Transaction } from '../types/transactionTypes';
 import { Category } from '../types/categoryTypes';
 import { BankAccount } from '../types/bankAccountTypes';
@@ -16,13 +20,13 @@ export function IncomeForm() {
       try {
         const [cats, accounts] = await Promise.all([
           fetchCategories('income'),
-          fetchBankAccounts()
+          fetchBankAccounts(),
         ]);
-        
+
         if (!cats.length) {
           throw new Error('No income categories found');
         }
-        
+
         if (!accounts.length) {
           throw new Error('No bank accounts found');
         }
@@ -38,7 +42,7 @@ export function IncomeForm() {
     loadData();
   }, []);
 
-  const handleIncomeSubmit = async (data: Omit<Transaction, "id">) => {
+  const handleIncomeSubmit = async (data: Omit<Transaction, 'id'>) => {
     try {
       await createTransaction(data);
       // Handle success
@@ -53,7 +57,7 @@ export function IncomeForm() {
 
   return (
     <TransactionForm
-      type="income"
+      type='income'
       categories={categories}
       bankAccounts={bankAccounts}
       onSubmit={handleIncomeSubmit}

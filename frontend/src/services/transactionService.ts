@@ -1,24 +1,24 @@
-import { Transaction } from '../types/transactionTypes'
+import { Transaction } from '../types/transactionTypes';
 
 const API_BASE = 'http://localhost:3001/api';
 
-export const createTransaction = async (transactionData: Omit<Transaction, "id">) => {
+export const createTransaction = async (transactionData: Omit<Transaction, 'id'>) => {
   try {
     const response = await fetch(`${API_BASE}/transactions`, {
       method: 'POST',
       headers: {
         'Content-Type': 'application/json',
-        'Accept': 'application/json'
+        Accept: 'application/json',
       },
       body: JSON.stringify({ transaction: transactionData }),
     });
-    
+
     const text = await response.text();
-    
+
     if (!response.ok) {
       throw new Error(`HTTP ${response.status}: ${text}`);
     }
-    
+
     try {
       return JSON.parse(text);
     } catch {
@@ -35,16 +35,16 @@ export const fetchCategories = async (type: 'income' | 'expense') => {
     const response = await fetch(`${API_BASE}/categories?type=${type}`, {
       headers: {
         'Content-Type': 'application/json',
-        'Accept': 'application/json'
+        Accept: 'application/json',
       },
     });
 
     const text = await response.text();
-    
+
     if (!response.ok) {
       throw new Error(`HTTP ${response.status}: ${text}`);
     }
-    
+
     try {
       return JSON.parse(text);
     } catch {
@@ -61,10 +61,10 @@ export const fetchBankAccounts = async () => {
     const response = await fetch(`${API_BASE}/bank_accounts`, {
       headers: {
         'Content-Type': 'application/json',
-        'Accept': 'application/json'
+        Accept: 'application/json',
       },
     });
-    
+
     if (!response.ok) {
       throw new Error(`HTTP error! status: ${response.status}`);
     }

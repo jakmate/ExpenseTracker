@@ -1,4 +1,4 @@
-import { BankAccount } from "../types/bankAccountTypes";
+import { BankAccount } from '../types/bankAccountTypes';
 
 export const BankAccountService = {
   create: async (bankAccount: Omit<BankAccount, 'id'>) => {
@@ -6,13 +6,13 @@ export const BankAccountService = {
       method: 'POST',
       headers: {
         'Content-Type': 'application/json',
-        'Origin': 'http://localhost:5173'
+        Origin: 'http://localhost:5173',
       },
       body: JSON.stringify({
         bank_account: {
           ...bankAccount,
-          user_id: 2
-        }
+          user_id: 1,
+        },
       }),
     });
 
@@ -22,5 +22,14 @@ export const BankAccountService = {
     }
 
     return response.json();
-  }
+  },
+
+  getAll: async (): Promise<BankAccount[]> => {
+    const response = await fetch('http://localhost:3001/api/bank_accounts?user_id=2');
+    if (!response.ok) {
+      const errorData = await response.json();
+      throw new Error(errorData.errors?.join(', ') || 'Failed to fetch accounts');
+    }
+    return response.json();
+  },
 };

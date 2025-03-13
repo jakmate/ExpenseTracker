@@ -1,10 +1,10 @@
-import { ChartWrapper } from '../components/ChartWrapper'
+import { ChartWrapper } from '../components/ChartWrapper';
 
 export function Dashboard() {
   return (
-    <div className="min-h-screen bg-gray-50 p-4">
-      <h2 className='text-center'>Dashboard</h2>
+    <div className='min-h-screen bg-blue-950 p-4'>
+      <h2 className='mb-8 text-center text-6xl font-bold text-white'>Dashboard</h2>
       <ChartWrapper />
     </div>
-  )
+  );
 }
