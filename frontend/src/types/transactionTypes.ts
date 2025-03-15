@@ -15,5 +15,5 @@ export interface TransactionFormProps {
   type: 'income' | 'expense';
   categories: Category[];
   bankAccounts: BankAccount[];
-  onSubmit: (data: Omit<Transaction, 'id'>) => void;
+  onSuccess?: () => void;
 }

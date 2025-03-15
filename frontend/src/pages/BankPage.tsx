@@ -1,6 +1,5 @@
 import { useEffect, useState, useCallback } from 'react';
 import { BankAccountForm } from '../components/BankAccountForm';
-import { ChartWrapper } from '../components/ChartWrapper';
 import { BankAccountService } from '../services/bankAccountService';
 import { BankAccount } from '../types/bankAccountTypes';
 import { formatSortCode } from '../utils/format';
@@ -116,7 +115,6 @@ export function BankPage() {
             </div>
           ))}
         </div>
-        <ChartWrapper />
       </div>
     </div>
   );

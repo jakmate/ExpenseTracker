@@ -14,7 +14,7 @@ Rails.application.routes.draw do
   # Defines the root path route ("/")
   # root "posts#index"
   namespace :api, defaults: { format: :json } do
-    resources :transactions, only: %i[create index]
+    resources :transactions, only: %i[index create]
     resources :bank_accounts, only: %i[index create]
     resources :categories, only: [ :index ]
   end

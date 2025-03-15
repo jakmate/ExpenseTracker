@@ -2,6 +2,8 @@
 
 module Api
   class TransactionsController < ApplicationController
+    skip_before_action :verify_authenticity_token
+
     def index
       @transactions = Transaction.all
       render json: @transactions

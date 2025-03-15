@@ -11,7 +11,7 @@ export const BankAccountService = {
       body: JSON.stringify({
         bank_account: {
           ...bankAccount,
-          user_id: 1,
+          user_id: 2,
         },
       }),
     });

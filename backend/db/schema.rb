@@ -10,7 +10,7 @@
 #
 # It's strongly recommended that you check this file into your version control system.
 
-ActiveRecord::Schema[8.0].define(version: 2025_03_07_125808) do
+ActiveRecord::Schema[8.0].define(version: 2025_03_15_180408) do
   create_table "bank_accounts", force: :cascade do |t|
     t.integer "user_id", null: false
     t.string "account_name", limit: 32, null: false
@@ -52,6 +52,7 @@ ActiveRecord::Schema[8.0].define(version: 2025_03_07_125808) do
     t.text "description"
     t.datetime "created_at", null: false
     t.datetime "updated_at", null: false
+    t.date "date"
     t.index ["bank_account_id"], name: "index_transactions_on_bank_account_id"
     t.index ["category_id"], name: "index_transactions_on_category_id"
   end
