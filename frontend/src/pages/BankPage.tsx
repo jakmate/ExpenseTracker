@@ -3,6 +3,8 @@ import { BankAccountForm } from '../components/BankAccountForm';
 import { BankAccountService } from '../services/bankAccountService';
 import { BankAccount } from '../types/bankAccountTypes';
 import { formatSortCode } from '../utils/format';
+import { AddButton } from '../components/AddButton';
+import { FormModal } from '../components/FormModal';
 
 export function BankPage() {
   const [bankAccounts, setBankAccounts] = useState<BankAccount[]>([]);
@@ -46,34 +48,20 @@ export function BankPage() {
         <h1 className='mb-8 text-center text-6xl font-bold text-white'>Bank Accounts</h1>
 
         <div className='mb-8 grid grid-cols-1 gap-6'>
-          <button
-            onClick={() => setShowForm(true)}
-            className='flex cursor-pointer items-center justify-center rounded-xl border-2 border-dashed border-gray-500 bg-gray-200 p-6 shadow-md transition-shadow hover:shadow-lg'
-            type='button'
+          <AddButton label='Add Account' onClick={() => setShowForm(true)} />
+          
+          <FormModal
+            title='Add New Bank Account'
+            show={showForm}
+            onClose={() => setShowForm(false)}
           >
-            <div className='text-2xl font-bold text-gray-500'>+</div>
-            <div className='ml-2 text-2xl font-bold text-gray-500'>Add Account</div>
-          </button>
-
-          {showForm && (
-            <div className='fixed inset-0 z-10 flex items-center justify-center backdrop-blur-sm'>
-              <div className='relative w-full max-w-lg rounded-xl bg-white shadow-xl'>
-                <button
-                  onClick={() => setShowForm(false)}
-                  className='absolute right-4 top-4 flex size-8 items-center justify-center rounded-full bg-blue-700 text-white transition-colors hover:bg-blue-900'
-                  aria-label='Close form'
-                >
-                  ×
-                </button>
-                <BankAccountForm
-                  onSuccess={() => {
-                    setShowForm(false);
-                    fetchAccounts();
-                  }}
-                />
-              </div>
-            </div>
-          )}
+            <BankAccountForm
+              onSuccess={() => {
+                setShowForm(false);
+                fetchAccounts();
+              }}
+            />
+          </FormModal>
 
           {bankAccounts.map((account) => (
             <div

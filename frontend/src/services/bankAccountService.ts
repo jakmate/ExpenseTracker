@@ -11,7 +11,7 @@ export const BankAccountService = {
       body: JSON.stringify({
         bank_account: {
           ...bankAccount,
-          user_id: 2,
+          user_id: 1  ,
         },
       }),
     });
@@ -25,7 +25,7 @@ export const BankAccountService = {
   },
 
   getAll: async (): Promise<BankAccount[]> => {
-    const response = await fetch('http://localhost:3001/api/bank_accounts?user_id=2');
+    const response = await fetch('http://localhost:3001/api/bank_accounts?user_id=1');
     if (!response.ok) {
       const errorData = await response.json();
       throw new Error(errorData.errors?.join(', ') || 'Failed to fetch accounts');

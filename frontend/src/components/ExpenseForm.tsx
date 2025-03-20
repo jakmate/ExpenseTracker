@@ -16,7 +16,7 @@ export function ExpenseForm({ onSuccess }: { onSuccess?: () => void }) {
 
   return (
     <TransactionForm
-      type='expense'
+      transaction_type='expense'
       categories={categories}
       bankAccounts={bankAccounts}
       onSuccess={onSuccess}

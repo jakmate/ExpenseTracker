@@ -4,7 +4,7 @@ import { TransactionService } from '../services/transactionService';
 import { TransactionFormProps } from '../types/transactionTypes';
 
 export function TransactionForm({
-  type,
+  transaction_type,
   categories,
   bankAccounts,
   onSuccess,
@@ -18,7 +18,7 @@ export function TransactionForm({
   } = useForm({ mode: 'onTouched' });
 
   const onSubmit = async (data: FieldValues) => {
-    const amount = type === 'expense' ? -Math.abs(data.amount) : data.amount;
+    const amount = transaction_type === 'expense' ? -Math.abs(data.amount) : data.amount;
     setIsSubmitting(true);
     try {
       await TransactionService.create({
@@ -42,7 +42,7 @@ export function TransactionForm({
   return (
     <div className='mx-auto max-w-md rounded-lg bg-white p-6 shadow-md'>
       <h2 className='mb-4 text-center text-xl font-bold text-gray-800'>
-        Add {type.charAt(0).toUpperCase() + type.slice(1)}
+        Add {transaction_type.charAt(0).toUpperCase() + transaction_type.slice(1)}
       </h2>
       <form className='space-y-4' onSubmit={handleSubmit(onSubmit)}>
         <div>

@@ -99,10 +99,6 @@ expenses = [
   }
 ]
 
-expenses.each do |attrs|
-  Expense.create!(attrs.merge(user: user)) if defined?(Expense)
-end
-
 incomes = [
   {
     bank_account: BankAccount.find_by(account_name: 'Current'),
@@ -134,6 +130,16 @@ incomes = [
   }
 ]
 
-incomes.each do |attrs|
-  Income.create!(attrs.merge(user: user)) if defined?(Income)
+transactions = expenses + incomes
+transactions.each do |attrs|
+  transaction_type = attrs[:category].category_type == 'income' ? :income : :expense
+  
+  Transaction.create!(
+    bank_account: attrs[:bank_account],
+    category: attrs[:category],
+    amount: attrs[:amount].abs,
+    description: attrs[:description],
+    date: attrs[:date],
+    transaction_type: transaction_type
+  )
 end

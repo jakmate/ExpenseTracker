@@ -9,7 +9,11 @@ interface Expense extends Transaction {
   account_name: string;
 }
 
-export function ExpensesTable() {
+interface ExpensesTableProps {
+  refreshTrigger: number;
+}
+
+export function ExpensesTable({ refreshTrigger }: ExpensesTableProps) {
   const [expenses, setExpenses] = useState<Expense[]>([]);
   const [error, setError] = useState<string | null>(null);
 
@@ -33,7 +37,7 @@ export function ExpensesTable() {
         );
 
         const expenses = transactions
-          .filter((t) => t.amount < 0)
+          .filter((t) => t.transaction_type === 'expense')
           .map((expense) => ({
             ...expense,
             category_name: categoryMap[expense.category_id] || 'Unknown Category',
@@ -47,7 +51,7 @@ export function ExpensesTable() {
     };
 
     fetchExpenses();
-  }, []);
+  }, [refreshTrigger]);
 
   if (error) return <div>Error: {error}</div>;
 

@@ -8,11 +8,11 @@ export interface Transaction {
   date: string;
   category_id: number;
   bank_account_id: number;
-  type?: 'income' | 'expense';
+  transaction_type?: 'income' | 'expense';
 }
 
 export interface TransactionFormProps {
-  type: 'income' | 'expense';
+  transaction_type: 'income' | 'expense';
   categories: Category[];
   bankAccounts: BankAccount[];
   onSuccess?: () => void;

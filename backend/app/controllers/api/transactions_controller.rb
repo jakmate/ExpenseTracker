@@ -27,7 +27,8 @@ module Api
         :description,
         :date,
         :category_id,
-        :bank_account_id
+        :bank_account_id,
+        :transaction_type
       )
     end
 

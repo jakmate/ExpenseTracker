@@ -9,7 +9,11 @@ interface Income extends Transaction {
   account_name: string;
 }
 
-export function IncomesTable() {
+interface IncomesTableProps {
+  refreshTrigger: number;
+}
+
+export function IncomesTable({ refreshTrigger }: IncomesTableProps) {
   const [incomes, setIncomes] = useState<Income[]>([]);
   const [error, setError] = useState<string | null>(null);
 
@@ -33,7 +37,7 @@ export function IncomesTable() {
         );
 
         const incomes = transactions
-          .filter((t) => t.amount < 0)
+          .filter((t) => t.transaction_type === 'income')
           .map((income) => ({
             ...income,
             category_name: categoryMap[income.category_id] || 'Unknown Category',
@@ -47,7 +51,7 @@ export function IncomesTable() {
     };
 
     fetchIncomes();
-  }, []);
+  }, [refreshTrigger]);
 
   if (error) return <div>Error: {error}</div>;
 
@@ -76,7 +80,7 @@ export function IncomesTable() {
                 <td className='px-6 py-4 text-sm text-gray-900'>{income.description}</td>
                 <td className='px-6 py-4 text-sm text-gray-900'>{income.category_name}</td>
                 <td className='px-6 py-4 text-sm text-gray-900'>{income.account_name}</td>
-                <td className='whitespace-nowrap px-6 py-4 text-sm text-red-600'>
+                <td className='whitespace-nowrap px-6 py-4 text-sm text-green-600'>
                   ${Math.abs(income.amount).toFixed(2)}
                 </td>
               </tr>
