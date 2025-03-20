@@ -67,3 +67,73 @@ income_categories.each do |name|
     user: user
   )
 end
+
+expenses = [
+  {
+    bank_account: BankAccount.find_by(account_name: 'Current'),
+    category: Category.find_by(name: 'Groceries', category_type: 'expense'),
+    amount: 50.00,
+    description: 'Weekly groceries',
+    date: Date.today - 5
+  },
+  {
+    bank_account: BankAccount.find_by(account_name: 'Current'),
+    category: Category.find_by(name: 'Rent', category_type: 'expense'),
+    amount: 500.00,
+    description: 'Monthly rent',
+    date: Date.today - 15
+  },
+  {
+    bank_account: BankAccount.find_by(account_name: 'My Savings'),
+    category: Category.find_by(name: 'Transport', category_type: 'expense'),
+    amount: 15.00,
+    description: 'Bus fare',
+    date: Date.today - 1
+  },
+  {
+    bank_account: BankAccount.find_by(account_name: 'Credit'),
+    category: Category.find_by(name: 'Utilities', category_type: 'expense'),
+    amount: 120.00,
+    description: 'Electricity bill',
+    date: Date.today - 10
+  }
+]
+
+expenses.each do |attrs|
+  Expense.create!(attrs.merge(user: user)) if defined?(Expense)
+end
+
+incomes = [
+  {
+    bank_account: BankAccount.find_by(account_name: 'Current'),
+    category: Category.find_by(name: 'Salary', category_type: 'income'),
+    amount: 2000.00,
+    description: 'Monthly salary',
+    date: Date.today - 20
+  },
+  {
+    bank_account: BankAccount.find_by(account_name: 'My Savings'),
+    category: Category.find_by(name: 'Freelance', category_type: 'income'),
+    amount: 300.00,
+    description: 'Freelance project',
+    date: Date.today - 7
+  },
+  {
+    bank_account: BankAccount.find_by(account_name: 'Credit'),
+    category: Category.find_by(name: 'Investments', category_type: 'income'),
+    amount: 150.00,
+    description: 'Stock dividend',
+    date: Date.today - 3
+  },
+  {
+    bank_account: BankAccount.find_by(account_name: 'Current'),
+    category: Category.find_by(name: 'Side Projects', category_type: 'income'),
+    amount: 100.00,
+    description: 'Side project earnings',
+    date: Date.today - 2
+  }
+]
+
+incomes.each do |attrs|
+  Income.create!(attrs.merge(user: user)) if defined?(Income)
+end

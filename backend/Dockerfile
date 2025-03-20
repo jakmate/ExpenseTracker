@@ -1,6 +1,6 @@
 FROM ruby:3.2-alpine
 
-# Install dependencies
+# Install dependencies (including dos2unix)
 RUN apk add --update --no-cache \
     build-base \
     sqlite-dev \
@@ -10,7 +10,8 @@ RUN apk add --update --no-cache \
     yaml-dev \
     gcompat \
     git \
-    linux-headers
+    linux-headers \
+    dos2unix
 
 # Configure environment
 ENV RAILS_ENV=development \
@@ -32,7 +33,8 @@ COPY . .
 
 # Entrypoint for DB initialization
 COPY entrypoint.sh /usr/bin/
-RUN chmod +x /usr/bin/entrypoint.sh
+RUN dos2unix /usr/bin/entrypoint.sh && \
+    chmod +x /usr/bin/entrypoint.sh
 ENTRYPOINT ["entrypoint.sh"]
 
 EXPOSE 3000
