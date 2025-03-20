@@ -2,7 +2,7 @@
 
 class Transaction < ApplicationRecord
   enum :transaction_type, { expense: 0, income: 1 }
-  
+
   validates :amount, presence: true
   validates :date, presence: true
   validates :category_id, presence: true

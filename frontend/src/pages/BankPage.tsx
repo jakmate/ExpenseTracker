@@ -49,7 +49,7 @@ export function BankPage() {
 
         <div className='mb-8 grid grid-cols-1 gap-6'>
           <AddButton label='Add Account' onClick={() => setShowForm(true)} />
-          
+
           <FormModal
             title='Add New Bank Account'
             show={showForm}

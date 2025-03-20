@@ -11,7 +11,7 @@ export function ExpensesPage() {
 
   const handleSuccess = () => {
     setShowForm(false);
-    setRefreshTrigger(prev => prev + 1);
+    setRefreshTrigger((prev) => prev + 1);
   };
 
   return (
@@ -20,11 +20,7 @@ export function ExpensesPage() {
       <div className='mb-8 grid grid-cols-1 gap-6'>
         <AddButton label='Add Expense' onClick={() => setShowForm(true)} />
 
-        <FormModal
-          title='Add New Expense'
-          show={showForm}
-          onClose={() => setShowForm(false)}
-        >
+        <FormModal title='Add New Expense' show={showForm} onClose={() => setShowForm(false)}>
           <ExpenseForm onSuccess={handleSuccess} />
         </FormModal>
       </div>

@@ -11,7 +11,7 @@ export function IncomesPage() {
 
   const handleSuccess = () => {
     setShowForm(false);
-    setRefreshTrigger(prev => prev + 1);
+    setRefreshTrigger((prev) => prev + 1);
   };
 
   return (
@@ -20,16 +20,12 @@ export function IncomesPage() {
       <div className='mb-8 grid grid-cols-1 gap-6'>
         <AddButton label='Add Income' onClick={() => setShowForm(true)} />
 
-        <FormModal
-          title='Add New Income'
-          show={showForm}
-          onClose={() => setShowForm(false)}
-        >
+        <FormModal title='Add New Income' show={showForm} onClose={() => setShowForm(false)}>
           <IncomeForm onSuccess={handleSuccess} />
         </FormModal>
       </div>
 
-      <IncomesTable refreshTrigger={refreshTrigger}/>
+      <IncomesTable refreshTrigger={refreshTrigger} />
       <ChartWrapper />
     </div>
   );

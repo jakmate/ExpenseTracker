@@ -133,7 +133,7 @@ incomes = [
 transactions = expenses + incomes
 transactions.each do |attrs|
   transaction_type = attrs[:category].category_type == 'income' ? :income : :expense
-  
+
   Transaction.create!(
     bank_account: attrs[:bank_account],
     category: attrs[:category],
