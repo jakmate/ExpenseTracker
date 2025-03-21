@@ -1,9 +1,9 @@
 import { useState } from 'react';
 import { IncomeForm } from '../components/IncomeForm';
-import { ChartWrapper } from '../components/ChartWrapper';
 import { IncomesTable } from '../components/IncomesTable';
 import { AddButton } from '../components/AddButton';
 import { FormModal } from '../components/FormModal';
+import { IncomePieChart } from '../components/IncomePieChart';
 
 export function IncomesPage() {
   const [showForm, setShowForm] = useState(false);
@@ -26,7 +26,7 @@ export function IncomesPage() {
       </div>
 
       <IncomesTable refreshTrigger={refreshTrigger} />
-      <ChartWrapper />
+      <IncomePieChart />
     </div>
   );
 }

@@ -1,9 +1,9 @@
 import { useState } from 'react';
 import { ExpenseForm } from '../components/ExpenseForm';
-import { ChartWrapper } from '../components/ChartWrapper';
 import { ExpensesTable } from '../components/ExpensesTable';
 import { AddButton } from '../components/AddButton';
 import { FormModal } from '../components/FormModal';
+import { ExpensePieChart } from '../components/ExpensePieChart';
 
 export function ExpensesPage() {
   const [showForm, setShowForm] = useState(false);
@@ -26,7 +26,7 @@ export function ExpensesPage() {
       </div>
 
       <ExpensesTable refreshTrigger={refreshTrigger} />
-      <ChartWrapper />
+      <ExpensePieChart />
     </div>
   );
 }
