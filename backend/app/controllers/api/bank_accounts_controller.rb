@@ -5,7 +5,7 @@ module Api
     skip_before_action :verify_authenticity_token
 
     def index
-      @bank_accounts = BankAccount.all
+      @bank_accounts = BankAccount.where(user_id: params[:user_id])
       render json: @bank_accounts, each_serializer: BankAccountSerializer
     end
 

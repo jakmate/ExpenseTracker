@@ -11,6 +11,7 @@ export const TransactionService = {
       body: JSON.stringify({
         transaction: {
           ...transactionData,
+          transaction_type: transactionData.amount > 0 ? 'income' : 'expense',
         },
       }),
     });
@@ -29,6 +30,11 @@ export const TransactionService = {
       const errorData = await response.json();
       throw new Error(errorData.errors?.join(', ') || 'Failed to fetch transactions');
     }
-    return response.json();
+    const data = await response.json();
+    return data.map((transaction: any) => ({
+      ...transaction,
+      amount: Number(transaction.amount),
+      date: transaction.date || new Date().toISOString(),
+    }));
   },
 };

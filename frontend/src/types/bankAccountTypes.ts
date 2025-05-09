@@ -7,4 +7,5 @@ export interface BankAccount {
   sortcode: number;
   balance: number;
   user_id: number;
+  created_at: string;
 }

@@ -3,15 +3,15 @@ FROM ruby:3.2-alpine
 # Install dependencies (including dos2unix)
 RUN apk add --update --no-cache \
     build-base \
-    sqlite-dev \
-    sqlite \
-    nodejs \
-    tzdata \
-    yaml-dev \
+    dos2unix \
     gcompat \
     git \
     linux-headers \
-    dos2unix
+    nodejs \
+    sqlite \
+    sqlite-dev \
+    tzdata \
+    yaml-dev
 
 # Configure environment
 ENV RAILS_ENV=development \

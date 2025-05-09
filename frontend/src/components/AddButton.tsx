@@ -7,11 +7,13 @@ export function AddButton({ label, onClick }: AddButtonProps) {
   return (
     <button
       onClick={onClick}
-      className='flex cursor-pointer items-center justify-center rounded-xl border-2 border-dashed border-gray-500 bg-gray-200 p-6 shadow-md transition-shadow hover:shadow-lg'
-      type='button'
+      className='bg-indigo-600 hover:bg-indigo-700 text-white px-4 py-2 rounded-lg
+               flex items-center gap-2 transition-colors shadow-sm'
     >
-      <div className='text-2xl font-bold text-gray-500'>+</div>
-      <div className='ml-2 text-2xl font-bold text-gray-500'>{label}</div>
+      <svg className='w-5 h-5' fill='none' stroke='currentColor' viewBox='0 0 24 24'>
+        <path strokeLinecap='round' strokeLinejoin='round' strokeWidth={2} d='M12 4v16m8-8H4' />
+      </svg>
+      {label}
     </button>
   );
 }
