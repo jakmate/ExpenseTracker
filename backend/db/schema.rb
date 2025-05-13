@@ -11,11 +11,14 @@
 # It's strongly recommended that you check this file into your version control system.
 
 ActiveRecord::Schema[8.0].define(version: 2025_03_20_120408) do
+  # These are extensions that must be enabled in order to support this database
+  enable_extension "pg_catalog.plpgsql"
+
   create_table "bank_accounts", force: :cascade do |t|
     t.integer "user_id", null: false
     t.string "account_name", limit: 32, null: false
     t.string "bank_name", limit: 32, null: false
-    t.integer "account_number", limit: 8, null: false
+    t.bigint "account_number", null: false
     t.string "sortcode", limit: 6, null: false
     t.string "account_type", null: false
     t.decimal "balance", precision: 16, scale: 2, null: false

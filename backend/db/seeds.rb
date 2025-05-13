@@ -13,6 +13,7 @@
 User.destroy_all
 Category.destroy_all
 BankAccount.destroy_all
+Budget.destroy_all
 
 user = User.create!(
   name: 'Demo User',
@@ -142,4 +143,39 @@ transactions.each do |attrs|
     date: attrs[:date],
     transaction_type: transaction_type
   )
+end
+
+# Get expense categories for budgets
+categories = Category.where(category_type: 'expense', user: user)
+
+# Create sample budgets for each expense category
+budgets = [
+  {
+    category: categories.find_by(name: 'Groceries'),
+    amount: 200.00,
+    budget_type: 'weekly',
+    user: user
+  },
+  {
+    category: categories.find_by(name: 'Rent'),
+    amount: 2000.00,
+    budget_type: 'monthly',
+    user: user
+  },
+  {
+    category: categories.find_by(name: 'Transport'),
+    amount: 150.00,
+    budget_type: 'monthly',
+    user: user
+  },
+  {
+    category: categories.find_by(name: 'Utilities'),
+    amount: 300.00,
+    budget_type: 'monthly',
+    user: user
+  }
+]
+
+budgets.each do |budget_attrs|
+  Budget.create!(budget_attrs)
 end

@@ -76,9 +76,9 @@ export function Sidebar() {
           </Link>
 
           <Link
-            to='/expenses'
+            to='/budgets'
             className={`flex h-16 w-full items-center justify-center rounded px-4 transition-colors md:justify-start ${
-              isActive('/expenses')
+              isActive('/budgets')
                 ? 'bg-white font-semibold text-blue-900'
                 : 'text-white hover:bg-blue-800'
             }`}
@@ -89,15 +89,12 @@ export function Sidebar() {
               viewBox='0 0 24 24'
               fill='currentColor'
             >
-              <path d='M12 7.5a2.25 2.25 0 100 4.5 2.25 2.25 0 000-4.5z' />
-              <path
-                fillRule='evenodd'
-                d='M1.5 4.875C1.5 3.839 2.34 3 3.375 3h17.25c1.035 0 1.875.84 1.875 1.875v9.75c0 1.036-.84 1.875-1.875 1.875H3.375A1.875 1.875 0 011.5 14.625v-9.75zM8.25 9.75a3.75 3.75 0 117.5 0 3.75 3.75 0 01-7.5 0zM18.75 9a.75.75 0 00-.75.75v.008c0 .414.336.75.75.75h.008a.75.75 0 00.75-.75V9.75a.75.75 0 00-.75-.75h-.008zM4.5 9.75A.75.75 0 015.25 9h.008a.75.75 0 01.75.75v.008a.75.75 0 01-.75.75H5.25a.75.75 0 01-.75-.75V9.75z'
-                clipRule='evenodd'
-              />
-              <path d='M2.25 18a.75.75 0 000 1.5c5.4 0 10.63.722 15.6 2.075 1.19.324 2.4-.558 2.4-1.82V18.75a.75.75 0 00-.75-.75H2.25z' />
+              <path d='M21 6.375c0 2.692-4.03 4.875-9 4.875S3 9.067 3 6.375 7.03 1.5 12 1.5s9 2.183 9 4.875z' />
+              <path d='M12 12.75c2.685 0 5.19-.586 7.078-1.609a8.283 8.283 0 001.897-1.384c.016.121.025.244.025.368C21 12.817 16.97 15 12 15s-9-2.183-9-4.875c0-.124.009-.247.025-.368a8.285 8.285 0 001.897 1.384C6.809 12.164 9.315 12.75 12 12.75z' />
+              <path d='M21 15.375c0 2.692-4.03 4.875-9 4.875s-9-2.183-9-4.875c0-.213.01-.426.03-.636.196.629.5 1.213.895 1.731C4.68 17.061 8.128 18 12 18c3.872 0 7.32-.939 9.075-2.53.394-.518.698-1.102.894-1.73.021.21.031.423.031.636z' />
+              <path d='M12 19.5c2.685 0 5.19-.586 7.078-1.609a8.282 8.282 0 001.897-1.384c.016.121.025.244.025.368 0 2.692-4.03 4.875-9 4.875s-9-2.183-9-4.875c0-.124.009-.247.025-.368a8.284 8.284 0 001.897 1.384C6.809 18.914 9.315 19.5 12 19.5z' />
             </svg>
-            {isExpanded && <span className='ml-4 text-xl'>Expenses</span>}
+            {isExpanded && <span className='ml-4 text-xl'>Budgets</span>}
           </Link>
 
           <Link
@@ -114,22 +111,36 @@ export function Sidebar() {
               viewBox='0 0 24 24'
               fill='currentColor'
             >
-              <path d='M12 7.5a2.25 2.25 0 100 4.5 2.25 2.25 0 000-4.5z' />
               <path
                 fillRule='evenodd'
-                d='M1.5 4.875C1.5 3.839 2.34 3 3.375 3h17.25c1.035 0 1.875.84 1.875 1.875v9.75c0 1.036-.84 1.875-1.875 1.875H3.375A1.875 1.875 0 011.5 14.625v-9.75zM8.25 9.75a3.75 3.75 0 117.5 0 3.75 3.75 0 01-7.5 0zM18.75 9a.75.75 0 00-.75.75v.008c0 .414.336.75.75.75h.008a.75.75 0 00.75-.75V9.75a.75.75 0 00-.75-.75h-.008zM4.5 9.75A.75.75 0 015.25 9h.008a.75.75 0 01.75.75v.008a.75.75 0 01-.75.75H5.25a.75.75 0 01-.75-.75V9.75z'
+                d='M12 2.25c-5.385 0-9.75 4.365-9.75 9.75s4.365 9.75 9.75 9.75 9.75-4.365 9.75-9.75S17.385 2.25 12 2.25zm.53 5.47a.75.75 0 00-1.06 0l-3 3a.75.75 0 101.06 1.06l1.72-1.72v5.69a.75.75 0 001.5 0v-5.69l1.72 1.72a.75.75 0 101.06-1.06l-3-3z'
                 clipRule='evenodd'
-              />
-              <path d='M2.25 18a.75.75 0 000 1.5c5.4 0 10.63.722 15.6 2.075 1.19.324 2.4-.558 2.4-1.82V18.75a.75.75 0 00-.75-.75H2.25z' />
-              <path
-                d='M15 12.75l-3-3m0 0l-3 3m3-3v7.5'
-                stroke='currentColor'
-                strokeWidth='1.5'
-                strokeLinecap='round'
-                strokeLinejoin='round'
               />
             </svg>
             {isExpanded && <span className='ml-4 text-xl'>Income</span>}
+          </Link>
+
+          <Link
+            to='/expenses'
+            className={`flex h-16 w-full items-center justify-center rounded px-4 transition-colors md:justify-start ${
+              isActive('/expenses')
+                ? 'bg-white font-semibold text-blue-900'
+                : 'text-white hover:bg-blue-800'
+            }`}
+          >
+            <svg
+              xmlns='http://www.w3.org/2000/svg'
+              className='size-6 shrink-0'
+              viewBox='0 0 24 24'
+              fill='currentColor'
+            >
+              <path
+                fillRule='evenodd'
+                d='M12 2.25c-5.385 0-9.75 4.365-9.75 9.75s4.365 9.75 9.75 9.75 9.75-4.365 9.75-9.75S17.385 2.25 12 2.25zm-.53 14.03a.75.75 0 001.06 0l3-3a.75.75 0 10-1.06-1.06l-1.72 1.72V8.25a.75.75 0 00-1.5 0v5.69l-1.72-1.72a.75.75 0 00-1.06 1.06l3 3z'
+                clipRule='evenodd'
+              />
+            </svg>
+            {isExpanded && <span className='ml-4 text-xl'>Expenses</span>}
           </Link>
 
           <Link
@@ -152,7 +163,6 @@ export function Sidebar() {
                 d='M20.25 10.332v9.918H21a.75.75 0 010 1.5H3a.75.75 0 010-1.5h.75v-9.918a.75.75 0 01.634-.74A49.109 49.109 0 0112 9c2.59 0 5.134.202 7.616.592a.75.75 0 01.634.74zm-7.5 2.418a.75.75 0 00-1.5 0v6.75a.75.75 0 001.5 0v-6.75zm3-.75a.75.75 0 01.75.75v6.75a.75.75 0 01-1.5 0v-6.75a.75.75 0 01.75-.75zM9 12.75a.75.75 0 00-1.5 0v6.75a.75.75 0 001.5 0v-6.75z'
                 clipRule='evenodd'
               />
-              <path d='M12 7.875a1.125 1.125 0 100-2.25 1.125 1.125 0 000 2.25z' />
             </svg>
             {isExpanded && <span className='ml-4 text-xl'>Bank</span>}
           </Link>

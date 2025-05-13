@@ -1,7 +1,7 @@
-import { PieChart } from './PieChart';
+import { TransactionPieChart } from './TransactionPieChart';
 
 export const IncomePieChart = () => (
-  <PieChart
+  <TransactionPieChart
     transactionType='income'
     title='Income by Category'
     colors={[

@@ -5,17 +5,25 @@ import { BankAccount } from '../types/bankAccountTypes';
 import { formatSortCode } from '../utils/format';
 import { AddButton } from '../components/AddButton';
 import { FormModal } from '../components/FormModal';
+import { LoadingSpinner } from '../components/LoadingSpinner';
+import { ErrorMessage } from '../components/ErrorMessage';
 
 export function BankPage() {
   const [bankAccounts, setBankAccounts] = useState<BankAccount[]>([]);
   const [showForm, setShowForm] = useState(false);
+  const [loading, setLoading] = useState(true);
+  const [error, setError] = useState<string | null>(null);
 
   const fetchAccounts = useCallback(async () => {
     try {
+      setLoading(true);
       const data = await BankAccountService.getAll();
       setBankAccounts(data);
-    } catch (error) {
-      console.error('Error fetching accounts:', error);
+      setError(null);
+    } catch (err) {
+      setError(err instanceof Error ? err.message : 'Failed to load bank accounts');
+    } finally {
+      setLoading(false);
     }
   }, []);
 
@@ -42,61 +50,71 @@ export function BankPage() {
     }
   };
 
+  if (loading) return <LoadingSpinner size={60} />;
+  if (error) return <ErrorMessage error={error} />;
+
   return (
     <div className='min-h-screen bg-blue-950 p-4'>
+      <h2 className='mb-8 text-center text-4xl md:text-6xl font-bold text-white'>Bank Accounts</h2>
+
       <div className='mx-auto max-w-7xl'>
-        <h1 className='mb-8 text-center text-6xl font-bold text-white'>Bank Accounts</h1>
-
-        <div className='mb-8 grid grid-cols-1 gap-6'>
+        <div className='mb-8 flex justify-end'>
           <AddButton label='Add Account' onClick={() => setShowForm(true)} />
+        </div>
 
-          <FormModal
-            title='Add New Bank Account'
-            show={showForm}
-            onClose={() => setShowForm(false)}
-          >
-            <BankAccountForm
-              onSuccess={() => {
-                setShowForm(false);
-                fetchAccounts();
-              }}
-            />
-          </FormModal>
+        <FormModal title='Add New Bank Account' show={showForm} onClose={() => setShowForm(false)}>
+          <BankAccountForm
+            onSuccess={() => {
+              setShowForm(false);
+              fetchAccounts();
+            }}
+          />
+        </FormModal>
 
+        <div className='grid grid-cols-1 lg:grid-cols-2 gap-6'>
           {bankAccounts.map((account) => (
             <div
               key={account.id}
-              className='rounded-xl bg-gray-200 p-6 shadow-md transition-shadow hover:shadow-lg'
+              className='bg-white rounded-lg p-4 shadow-lg hover:shadow-xl transition-shadow'
             >
-              <div className='grid w-full grid-cols-[1fr_auto] gap-4'>
-                <div className='space-y-4'>
-                  <h2 className='text-2xl font-semibold'>{account.account_name}</h2>
-                  <div className='grid grid-cols-2 gap-4'>
-                    <div className='border-r border-gray-400 pr-4'>
-                      <span className='font-medium'>Bank:</span> {account.bank_name}
+              <div className='flex justify-between items-start'>
+                <div className='space-y-4 flex-1'>
+                  <h3 className='text-xl font-bold text-blue-900'>{account.account_name}</h3>
+
+                  <div className='grid grid-cols-2 gap-4 text-gray-600'>
+                    <div>
+                      <p className='font-medium'>Bank Name</p>
+                      <p>{account.bank_name}</p>
                     </div>
-                    <div className='pl-4'>
-                      <span className='font-medium'>Type:</span> {account.account_type}
-                    </div>
-                  </div>
-                  <div className='grid grid-cols-2 gap-4'>
-                    <div className='border-r border-gray-400 pr-4'>
-                      <span className='font-medium'>Account:</span> {account.account_number}
-                    </div>
-                    <div className='pl-4'>
-                      <span className='font-medium'>Sortcode:</span>{' '}
-                      {formatSortCode(account.sortcode)}
+                    <div>
+                      <p className='font-medium'>Account Type</p>
+                      <p>{account.account_type}</p>
                     </div>
                   </div>
+
+                  <div className='grid grid-cols-2 gap-4 text-gray-600'>
+                    <div>
+                      <p className='font-medium'>Account Number</p>
+                      <p>{account.account_number}</p>
+                    </div>
+                    <div>
+                      <p className='font-medium'>Sort Code</p>
+                      <p>{formatSortCode(account.sortcode)}</p>
+                    </div>
+                  </div>
+
                   <div className='mt-4'>
-                    <span className='font-medium'>Balance:</span> ${account.balance}
+                    <p className='text-lg font-bold text-blue-900'>
+                      Balance: £{account.balance.toFixed(2)}
+                    </p>
                   </div>
                 </div>
-                <div className='flex items-center justify-end'>
+
+                <div className='ml-4'>
                   <img
                     src={getBankImage(account.bank_name)}
-                    alt={`${account.bank_name} card`}
-                    className='w-2xs'
+                    alt={`${account.bank_name} logo`}
+                    className='w-20 h-20 object-contain'
                   />
                 </div>
               </div>

@@ -31,7 +31,7 @@ export const TransactionService = {
       throw new Error(errorData.errors?.join(', ') || 'Failed to fetch transactions');
     }
     const data = await response.json();
-    return data.map((transaction: any) => ({
+    return data.map((transaction: Transaction) => ({
       ...transaction,
       amount: Number(transaction.amount),
       date: transaction.date || new Date().toISOString(),

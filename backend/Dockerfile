@@ -6,10 +6,11 @@ RUN apk add --update --no-cache \
     dos2unix \
     gcompat \
     git \
+    libpq-dev \
     linux-headers \
     nodejs \
-    sqlite \
-    sqlite-dev \
+    postgresql-client \
+    postgresql-dev \
     tzdata \
     yaml-dev
 
@@ -33,7 +34,7 @@ COPY . .
 
 # Entrypoint for DB initialization
 COPY entrypoint.sh /usr/bin/
-RUN dos2unix /usr/bin/entrypoint.sh && \
+RUN find /usr/bin/ -name "*.sh" -exec dos2unix {} \; && \
     chmod +x /usr/bin/entrypoint.sh
 ENTRYPOINT ["entrypoint.sh"]
 

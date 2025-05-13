@@ -17,7 +17,7 @@ const formatCurrency = (amount: number) =>
     currency: 'GBP',
   }).format(amount);
 
-export const PieChart = ({
+export const TransactionPieChart = ({
   transactionType,
   title,
   colors,
@@ -110,6 +110,9 @@ export const PieChart = ({
           flex: 1,
           position: 'relative',
           height: 'calc(100% - 40px)',
+          display: 'flex',
+          justifyContent: 'center',
+          alignItems: 'center',
         }}
       >
         {isLoading && <LoadingSpinner />}
@@ -135,8 +138,10 @@ export const PieChart = ({
           ref={chartRef}
           style={{
             display: hasData ? 'block' : 'none',
-            width: '100%',
-            height: '100%',
+            width: '80%',
+            height: '80%',
+            maxWidth: '300px',
+            maxHeight: '300px',
           }}
         />
       </div>

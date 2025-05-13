@@ -31,7 +31,7 @@ export const BankAccountService = {
       throw new Error(errorData.errors?.join(', ') || 'Failed to fetch accounts');
     }
     const data = await response.json();
-    return data.map((account: any) => ({
+    return data.map((account: BankAccount) => ({
       ...account,
       balance: Number(account.balance),
       created_at: account.created_at || new Date().toISOString(),

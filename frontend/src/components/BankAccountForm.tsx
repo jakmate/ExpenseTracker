@@ -22,6 +22,7 @@ export function BankAccountForm({ onSuccess }: { onSuccess?: () => void }) {
         sortcode: Number(data.sortcode),
         balance: parseFloat(data.balance),
         user_id: 1,
+        created_at: '',
       });
       reset();
       alert('Bank account created successfully!');

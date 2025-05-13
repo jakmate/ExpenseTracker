@@ -1,30 +1,33 @@
-export const TimeframeSelector = ({
-  timeframe,
-  setTimeframe,
-}: {
+type TimeframeSelectorProps = {
   timeframe: 'current' | 'previous';
-  setTimeframe: (value: 'current' | 'previous') => void;
-}) => (
-  <div
-    style={{
-      position: 'absolute',
-      right: '16px',
-      top: '16px',
-      zIndex: 1,
-    }}
-  >
-    <select
-      value={timeframe}
-      onChange={(e) => setTimeframe(e.target.value as 'current' | 'previous')}
-      style={{
-        padding: '6px 12px',
-        borderRadius: '4px',
-        border: '1px solid #ddd',
-        fontSize: '14px',
-      }}
-    >
-      <option value='current'>Current Month</option>
-      <option value='previous'>Previous Month</option>
-    </select>
-  </div>
-);
+  setTimeframe: (timeframe: 'current' | 'previous') => void;
+};
+
+export function TimeframeSelector({ timeframe, setTimeframe }: TimeframeSelectorProps) {
+  return (
+    <div className='inline-flex rounded-md shadow-sm'>
+      <button
+        type='button'
+        onClick={() => setTimeframe('current')}
+        className={`rounded-l-md border px-4 py-2 text-sm font-medium focus:z-10 focus:ring-2 ${
+          timeframe === 'current'
+            ? 'border-blue-600 bg-blue-600 text-white'
+            : 'border-gray-300 bg-white text-gray-700 hover:bg-gray-50'
+        }`}
+      >
+        Current
+      </button>
+      <button
+        type='button'
+        onClick={() => setTimeframe('previous')}
+        className={`rounded-r-md border px-4 py-2 text-sm font-medium focus:z-10 focus:ring-2 ${
+          timeframe === 'previous'
+            ? 'border-blue-600 bg-blue-600 text-white'
+            : 'border-gray-300 bg-white text-gray-700 hover:bg-gray-50'
+        }`}
+      >
+        Previous
+      </button>
+    </div>
+  );
+}

@@ -12,6 +12,20 @@ jobs:
   build:
     runs-on: ubuntu-latest
 
+    services:
+      postgres:
+        image: postgres:latest
+        env:
+          POSTGRES_USER: postgres
+          POSTGRES_PASSWORD: postgres
+          POSTGRES_DB: postgres_test
+        ports:
+          - 5432:5432
+        options: --health-cmd pg_isready --health-interval 10s --health-timeout 5s --health-retries 5
+
+    env:
+      DATABASE_URL: postgres://postgres:postgres@localhost:5432/postgres_test
+
     steps:
     - uses: actions/checkout@v4
 
@@ -21,12 +35,14 @@ jobs:
         ruby-version: 3.2
         bundler-cache: true
 
+    - name: Install PostgreSQL dependencies
+      run: sudo apt-get install -y libpq-dev
+
     - name: Install Dependencies
       working-directory: backend
       run: |
         gem install bundler
         bundle config set force_ruby_platform true
-        bundle config build.sqlite3 --with-opt-dir=/usr/lib/x86_64-linux-gnu/sqlite3
         bundle install
 
     - name: Run Brakeman (Security Linter)

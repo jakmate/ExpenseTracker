@@ -5,8 +5,14 @@ module Api
     skip_before_action :verify_authenticity_token
 
     def index
-      @categories = Category.where(category_type: params[:type])
-      render json: @categories
+      @categories =
+        if params[:type].present?
+          Category.where(category_type: params[:type])
+        else
+          Category.all
+        end
+
+      render json: @categories, each_serializer: CategorySerializer
     end
   end
 end
