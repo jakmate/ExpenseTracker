@@ -96,7 +96,7 @@ export function IncomesTable({ refreshTrigger }: IncomesTableProps) {
                     {new Date(income.date).toLocaleDateString('en-GB')}
                   </td>
                   <td className='px-4 py-3 text-sm text-slate-800'>{income.description}</td>
-                  <td className='px-4 py-3 text-sm text-right font-medium text-red-600'>
+                  <td className='px-4 py-3 text-sm text-right font-medium text-green-600'>
                     £{Math.abs(income.amount).toFixed(2)}
                   </td>
                 </tr>

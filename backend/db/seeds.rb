@@ -15,12 +15,12 @@ Category.destroy_all
 BankAccount.destroy_all
 Budget.destroy_all
 
-user = User.create!(
+user = User.find_or_create_by!(
   name: 'Demo User',
   email: 'demo@expensetracker.com'
 )
 
-BankAccount.create!([
+BankAccount.find_or_create_by!([
 {
   user: user,
   bank_name: 'Lloyds',
@@ -135,7 +135,7 @@ transactions = expenses + incomes
 transactions.each do |attrs|
   transaction_type = attrs[:category].category_type == 'income' ? :income : :expense
 
-  Transaction.create!(
+  Transaction.find_or_create_by!(
     bank_account: attrs[:bank_account],
     category: attrs[:category],
     amount: attrs[:amount].abs,
@@ -177,5 +177,5 @@ budgets = [
 ]
 
 budgets.each do |budget_attrs|
-  Budget.create!(budget_attrs)
+  Budget.find_or_create_by!(budget_attrs)
 end

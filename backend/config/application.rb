@@ -20,11 +20,12 @@ module Backend
 
     config.middleware.insert_before 0, Rack::Cors do
       allow do
-        origins "https://expense-tracker-three-sable-48.vercel.app/", "localhost:5173", "127.0.0.1:5173"
+        origins "https://expense-tracker-three-sable-48.vercel.app", "localhost:5173", "127.0.0.1:5173"
         resource "*",
                  headers: :any,
                  methods: %i[get post put patch delete options head],
-                 credentials: false
+                 credentials: false,
+                 expose: ['Access-Control-Allow-Origin']
       end
     end
 

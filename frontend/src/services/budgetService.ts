@@ -33,7 +33,7 @@ export const BudgetService = {
   },
 
   update: async (id: number, budgetData: BudgetCreateData): Promise<Budget> => {
-    const response = await fetch(`${API_BASE}/${id}`, {
+    const response = await fetch(`${API_BASE}/api/budgets/${id}`, {
       method: 'PUT',
       headers: { 'Content-Type': 'application/json' },
       body: JSON.stringify({ budget: budgetData }),
@@ -46,7 +46,7 @@ export const BudgetService = {
   },
 
   delete: async (id: number): Promise<void> => {
-    const response = await fetch(`${API_BASE}/${id}`, { method: 'DELETE' });
+    const response = await fetch(`${API_BASE}/api/budgets/${id}`, { method: 'DELETE' });
     if (!response.ok) {
       const errorData = await response.json();
       throw new Error(errorData.errors?.join(', ') || 'Failed to delete budget');
