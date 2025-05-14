@@ -5,3 +5,5 @@
 **/tmp
 **/.env
 **/storage/*.sqlite3
+**/.env.production
+**/credentials.yml.enc

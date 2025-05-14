@@ -14,10 +14,11 @@ backend/storage/*
 backend/.ruby-version
 backend/.kamal
 backend/config/master.key
-*.sqlite3
+backend/config/credentials.yml.enc
 
 # Frontend
 frontend/node_modules/
 frontend/dist/
 frontend/.env
 frontend/.eslintcache
+frontend/.env.production
