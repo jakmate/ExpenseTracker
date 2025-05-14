@@ -15,24 +15,30 @@ export function IncomesPage() {
   };
 
   return (
-    <div className='min-h-screen bg-blue-950 p-6'>
+    <div className='min-h-screen bg-blue-950 p-4 md:p-6'>
       <div className='space-y-6'>
-        <div className='flex justify-between items-center mb-8'>
-          <h1 className='text-4xl md:text-6xl font-bold text-white text-center w-full'>
+        <div className='flex flex-col md:flex-row justify-between items-center mb-4 md:mb-8'>
+          <h1 className='text-2xl md:text-4xl lg:text-6xl font-bold text-white text-center md:text-left w-full mb-4 md:mb-0'>
             Income Management
           </h1>
           <AddButton onClick={() => setShowForm(true)} label='Add Income' />
         </div>
 
-        <div className='grid grid-cols-1 lg:grid-cols-3 gap-6'>
-          <div className='bg-white rounded-lg p-6 shadow-lg col-span-2'>
-            <h2 className='text-2xl font-bold text-blue-900 mb-6'>Recent Incomes</h2>
-            <IncomesTable refreshTrigger={refreshTrigger} />
+        <div className='grid grid-cols-1 lg:grid-cols-3 gap-4 md:gap-6'>
+          <div className='bg-white rounded-lg p-4 md:p-6 shadow-lg lg:col-span-2'>
+            <h2 className='text-xl md:text-2xl font-bold text-blue-900 mb-4 md:mb-6'>
+              Recent Incomes
+            </h2>
+            <div className='overflow-x-auto'>
+              <IncomesTable refreshTrigger={refreshTrigger} />
+            </div>
           </div>
 
-          <div className='bg-white rounded-lg p-6 shadow-lg'>
-            <h2 className='text-2xl font-bold text-blue-900 mb-6'>Income Breakdown</h2>
-            <IncomePieChart />
+          <div className='bg-white rounded-lg p-4 md:p-6 shadow-lg'>
+            <h2 className='text-xl md:text-2xl font-bold text-blue-900 mb-4'>Income Breakdown</h2>
+            <div className='h-60 md:h-72 flex-1 overflow-hidden'>
+              <IncomePieChart />
+            </div>
           </div>
         </div>
       </div>

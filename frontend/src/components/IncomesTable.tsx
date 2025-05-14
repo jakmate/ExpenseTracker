@@ -61,7 +61,7 @@ export function IncomesTable({ refreshTrigger }: IncomesTableProps) {
   }, [refreshTrigger]);
 
   return (
-    <div className='mx-auto w-full relative min-h-[400px]'>
+    <div className='w-full relative min-h-[300px]'>
       {isLoading && (
         <div className='absolute inset-0 flex justify-center items-center'>
           <LoadingSpinner size={60} />
@@ -75,32 +75,43 @@ export function IncomesTable({ refreshTrigger }: IncomesTableProps) {
       )}
 
       {!isLoading && !error && (
-        <div className='rounded-lg border border-gray-200 shadow'>
-          <table className='w-full divide-y divide-gray-200'>
+        <div className='w-full overflow-x-auto'>
+          <table className='w-full divide-y divide-gray-200 table-auto'>
             <thead className='bg-slate-50'>
               <tr>
-                {['Date', 'Description', 'Amount'].map((header) => (
-                  <th
-                    key={header}
-                    className='px-4 py-3 text-left text-sm font-medium text-slate-500 uppercase tracking-wider'
-                  >
-                    {header}
-                  </th>
-                ))}
+                <th className='px-3 py-3 text-left text-xs md:text-sm font-medium text-slate-500 uppercase tracking-wider'>
+                  Date
+                </th>
+                <th className='px-3 py-3 text-left text-xs md:text-sm font-medium text-slate-500 uppercase tracking-wider'>
+                  Description
+                </th>
+                <th className='px-3 py-3 text-right text-xs md:text-sm font-medium text-slate-500 uppercase tracking-wider'>
+                  Amount
+                </th>
               </tr>
             </thead>
-            <tbody className='divide-y divide-slate-200'>
-              {incomes.map((income) => (
-                <tr key={income.id}>
-                  <td className='px-4 py-3 text-sm text-slate-600'>
-                    {new Date(income.date).toLocaleDateString('en-GB')}
-                  </td>
-                  <td className='px-4 py-3 text-sm text-slate-800'>{income.description}</td>
-                  <td className='px-4 py-3 text-sm text-right font-medium text-green-600'>
-                    £{Math.abs(income.amount).toFixed(2)}
+            <tbody className='bg-white divide-y divide-slate-200'>
+              {incomes.length === 0 ? (
+                <tr>
+                  <td colSpan={3} className='px-3 py-4 text-center text-sm text-slate-500'>
+                    No incomes recorded
                   </td>
                 </tr>
-              ))}
+              ) : (
+                incomes.map((income) => (
+                  <tr key={income.id} className='hover:bg-slate-50'>
+                    <td className='px-3 py-2 md:py-3 text-xs md:text-sm text-slate-600 whitespace-nowrap'>
+                      {new Date(income.date).toLocaleDateString('en-GB')}
+                    </td>
+                    <td className='px-3 py-2 md:py-3 text-xs md:text-sm text-slate-800'>
+                      {income.description}
+                    </td>
+                    <td className='px-3 py-2 md:py-3 text-xs md:text-sm text-right font-medium text-green-600 whitespace-nowrap'>
+                      £{Math.abs(income.amount).toFixed(2)}
+                    </td>
+                  </tr>
+                ))
+              )}
             </tbody>
           </table>
         </div>

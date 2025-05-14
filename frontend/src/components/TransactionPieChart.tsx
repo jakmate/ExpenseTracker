@@ -49,10 +49,10 @@ export const TransactionPieChart = ({
         },
         options: {
           responsive: true,
+          maintainAspectRatio: false,
           plugins: {
             legend: {
-              position: 'bottom',
-              labels: { font: { size: 14 } },
+              display: false,
             },
             tooltip: {
               callbacks: {
@@ -66,8 +66,8 @@ export const TransactionPieChart = ({
             title: {
               display: true,
               text: `${title} (${getMonthName(timeframe === 'current' ? 0 : -1)})`,
-              padding: 20,
-              font: { size: 18 },
+              padding: { top: 10, bottom: 5 },
+              font: { size: 16 },
             },
           },
         },
@@ -82,76 +82,39 @@ export const TransactionPieChart = ({
   const hasData = !isLoading && !error && Object.keys(data).length > 0;
 
   return (
-    <div
-      style={{
-        width: '400px',
-        height: '400px',
-        position: 'relative',
-        border: '1px solid #eee',
-        borderRadius: '8px',
-        padding: '16px',
-        display: 'flex',
-        flexDirection: 'column',
-      }}
-    >
-      <div
-        style={{
-          display: 'flex',
-          justifyContent: 'flex-end',
-          marginBottom: '20px',
-          height: '40px',
-        }}
-      >
+    <div className='w-full h-full flex flex-col border border-gray-200 rounded-lg p-4 overflow-hidden'>
+      <div className='flex justify-end mb-2'>
         <TimeframeSelector timeframe={timeframe} setTimeframe={setTimeframe} />
       </div>
 
-      <div
-        style={{
-          flex: 1,
-          position: 'relative',
-          height: 'calc(100% - 40px)',
-          display: 'flex',
-          justifyContent: 'center',
-          alignItems: 'center',
-        }}
-      >
+      <div className='relative flex-1 flex justify-center items-center w-full min-h-0'>
         {isLoading && <LoadingSpinner />}
         {error && <ErrorMessage error={error} />}
 
         {!isLoading && !error && !hasData && (
-          <div
-            style={{
-              position: 'absolute',
-              top: '50%',
-              left: '50%',
-              transform: 'translate(-50%, -50%)',
-              textAlign: 'center',
-              color: '#666',
-              padding: '20px',
-            }}
-          >
+          <div className='text-center text-gray-600 p-4'>
             No {transactionType} recorded for {getMonthName(timeframe === 'current' ? 0 : -1)}
           </div>
         )}
 
-        <canvas
-          ref={chartRef}
-          style={{
-            display: hasData ? 'block' : 'none',
-            width: '80%',
-            height: '80%',
-            maxWidth: '300px',
-            maxHeight: '300px',
-          }}
-        />
+        <div className={`w-full h-full ${hasData ? 'block' : 'hidden'}`}>
+          <canvas ref={chartRef} />
+        </div>
       </div>
 
-      <style>{`
-        @keyframes spin {
-          0% { transform: rotate(0deg); }
-          100% { transform: rotate(360deg); }
-        }
-      `}</style>
+      {hasData && (
+        <div className='flex flex-wrap justify-center gap-2 mt-2 text-xs'>
+          {Object.keys(data).map((label, index) => (
+            <div key={label} className='flex items-center'>
+              <div
+                className='w-3 h-3 mr-1'
+                style={{ backgroundColor: colors[index % colors.length] }}
+              ></div>
+              <span>{label}</span>
+            </div>
+          ))}
+        </div>
+      )}
     </div>
   );
 };

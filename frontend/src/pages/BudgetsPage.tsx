@@ -137,18 +137,20 @@ export default function BudgetsPage() {
   };
 
   return (
-    <div className='min-h-screen bg-blue-950 p-6'>
+    <div className='min-h-screen bg-blue-950 p-4 md:p-6'>
       <div className='space-y-6'>
-        <div className='flex justify-between items-center mb-8'>
-          <h1 className='text-4xl md:text-6xl font-bold text-white text-center w-full'>
+        <div className='flex flex-col md:flex-row justify-between items-center mb-4 md:mb-8'>
+          <h1 className='text-2xl md:text-4xl lg:text-6xl font-bold text-white text-center md:text-left w-full mb-4 md:mb-0'>
             Budget Management
           </h1>
           <AddButton onClick={openCreateModal} label='Add Budget' />
         </div>
 
-        <div className='grid grid-cols-1 lg:grid-cols-3 gap-6'>
-          <div className='bg-white rounded-lg p-6 shadow-lg col-span-2'>
-            <h2 className='text-2xl font-bold text-blue-900 mb-6'>Active Budgets</h2>
+        <div className='grid grid-cols-1 md:grid-cols-2 lg:grid-cols-3 gap-4 md:gap-6'>
+          <div className='bg-white rounded-lg p-4 md:p-6 shadow-lg md:col-span-2'>
+            <h2 className='text-xl md:text-2xl font-bold text-blue-900 mb-4 md:mb-6'>
+              Active Budgets
+            </h2>
             <BudgetsList
               budgets={budgetsWithSpent}
               isLoading={isLoading}
@@ -158,22 +160,32 @@ export default function BudgetsPage() {
             />
           </div>
 
-          <div className='bg-white rounded-lg p-6 shadow-lg'>
-            <h2 className='text-2xl font-bold text-blue-900 mb-6'>Budget Overview</h2>
-            <div className='space-y-6'>
-              <div className='bg-blue-50 rounded-lg p-4'>
-                <h3 className='text-sm font-semibold text-blue-800 mb-2'>Total Budgets</h3>
-                <p className='text-3xl font-bold text-blue-600'>£{totalBudget.toFixed(2)}</p>
+          <div className='bg-white rounded-lg p-4 md:p-6 shadow-lg'>
+            <h2 className='text-xl md:text-2xl font-bold text-blue-900 mb-4 md:mb-6'>
+              Budget Overview
+            </h2>
+            <div className='grid grid-cols-1 md:grid-cols-2 lg:grid-cols-1 gap-4'>
+              <div className='bg-blue-50 rounded-lg p-3 md:p-4'>
+                <h3 className='text-sm md:text-base font-semibold text-blue-800 mb-1 md:mb-2'>
+                  Total Budgets
+                </h3>
+                <p className='text-xl md:text-2xl lg:text-3xl font-bold text-blue-600'>
+                  £{totalBudget.toFixed(2)}
+                </p>
               </div>
-              <div className='bg-green-50 rounded-lg p-4'>
-                <h3 className='text-sm font-semibold text-green-800 mb-2'>Remaining Funds</h3>
-                <p className='text-3xl font-bold text-green-600'>
+              <div className='bg-blue-50 rounded-lg p-3 md:p-4'>
+                <h3 className='text-sm md:text-base font-semibold text-green-800 mb-1 md:mb-2'>
+                  Remaining Funds
+                </h3>
+                <p className='text-xl md:text-2xl lg:text-3xl font-bold text-green-600'>
                   £{(totalBudget - totalSpent).toFixed(2)}
                 </p>
               </div>
-              <div className='bg-purple-50 rounded-lg p-4'>
-                <h3 className='text-sm font-semibold text-purple-800 mb-2'>Categories Used</h3>
-                <p className='text-3xl font-bold text-purple-600'>
+              <div className='bg-purple-50 rounded-lg p-3 md:p-4'>
+                <h3 className='text-sm md:text-base font-semibold text-purple-800 mb-1 md:mb-2'>
+                  Categories Used
+                </h3>
+                <p className='text-xl md:text-2xl lg:text-3xl font-bold text-purple-600'>
                   {new Set(budgets.map((b) => b.category_id)).size}
                 </p>
               </div>

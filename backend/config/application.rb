@@ -25,7 +25,7 @@ module Backend
                  headers: :any,
                  methods: %i[get post put patch delete options head],
                  credentials: false,
-                 expose: ['Access-Control-Allow-Origin']
+                 expose: [ "Access-Control-Allow-Origin" ]
       end
     end
 
