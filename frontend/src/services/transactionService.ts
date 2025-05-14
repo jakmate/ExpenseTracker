@@ -1,8 +1,10 @@
 import { Transaction } from '../types/transactionTypes';
 
+const API_BASE = import.meta.env.VITE_API_BASE_URL || 'http://localhost:3001';
+
 export const TransactionService = {
   create: async (transactionData: Omit<Transaction, 'id'>) => {
-    const response = await fetch(`http://localhost:3001/api/transactions`, {
+    const response = await fetch(`${API_BASE}/api/transactions`, {
       method: 'POST',
       headers: {
         'Content-Type': 'application/json',
@@ -25,7 +27,7 @@ export const TransactionService = {
   },
 
   getAll: async (): Promise<Transaction[]> => {
-    const response = await fetch('http://localhost:3001/api/transactions');
+    const response = await fetch(`${API_BASE}/api/transactions`);
     if (!response.ok) {
       const errorData = await response.json();
       throw new Error(errorData.errors?.join(', ') || 'Failed to fetch transactions');

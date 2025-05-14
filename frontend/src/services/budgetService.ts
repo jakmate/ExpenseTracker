@@ -1,10 +1,10 @@
 import { Budget, BudgetCreateData } from '../types/budgetTypes';
 
-const getBaseUrl = () => 'http://localhost:3001/api/budgets';
+const API_BASE = import.meta.env.VITE_API_BASE_URL || 'http://localhost:3001';
 
 export const BudgetService = {
   getAll: async (userId: number = 1): Promise<Budget[]> => {
-    const response = await fetch(`${getBaseUrl()}?user_id=${userId}`);
+    const response = await fetch(`${API_BASE}/api/budgets?user_id=${userId}`);
     if (!response.ok) {
       const errorText = await response.text();
       let errorMessage;
@@ -20,7 +20,7 @@ export const BudgetService = {
   },
 
   create: async (budgetData: BudgetCreateData): Promise<Budget> => {
-    const response = await fetch(getBaseUrl(), {
+    const response = await fetch(API_BASE, {
       method: 'POST',
       headers: { 'Content-Type': 'application/json' },
       body: JSON.stringify({ budget: { ...budgetData, user_id: 1 } }),
@@ -33,7 +33,7 @@ export const BudgetService = {
   },
 
   update: async (id: number, budgetData: BudgetCreateData): Promise<Budget> => {
-    const response = await fetch(`${getBaseUrl()}/${id}`, {
+    const response = await fetch(`${API_BASE}/${id}`, {
       method: 'PUT',
       headers: { 'Content-Type': 'application/json' },
       body: JSON.stringify({ budget: budgetData }),
@@ -46,7 +46,7 @@ export const BudgetService = {
   },
 
   delete: async (id: number): Promise<void> => {
-    const response = await fetch(`${getBaseUrl()}/${id}`, { method: 'DELETE' });
+    const response = await fetch(`${API_BASE}/${id}`, { method: 'DELETE' });
     if (!response.ok) {
       const errorData = await response.json();
       throw new Error(errorData.errors?.join(', ') || 'Failed to delete budget');

@@ -1,8 +1,10 @@
 import { BankAccount } from '../types/bankAccountTypes';
 
+const API_BASE = import.meta.env.VITE_API_BASE_URL || 'http://localhost:3001';
+
 export const BankAccountService = {
   create: async (bankAccount: Omit<BankAccount, 'id'>) => {
-    const response = await fetch('http://localhost:3001/api/bank_accounts', {
+    const response = await fetch(`${API_BASE}/api/bank_accounts`, {
       method: 'POST',
       headers: {
         'Content-Type': 'application/json',
@@ -25,7 +27,7 @@ export const BankAccountService = {
   },
 
   getAll: async (): Promise<BankAccount[]> => {
-    const response = await fetch('http://localhost:3001/api/bank_accounts?user_id=1');
+    const response = await fetch(`${API_BASE}/api/bank_accounts?user_id=1`);
     if (!response.ok) {
       const errorData = await response.json();
       throw new Error(errorData.errors?.join(', ') || 'Failed to fetch accounts');
