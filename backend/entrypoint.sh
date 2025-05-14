@@ -1,11 +1,6 @@
 #!/bin/sh
 set -e
 
-until PGPASSWORD=$POSTGRES_PASSWORD psql -h "postgres" -U "postgres" -d "postgres" -c '\q'; do
-  >&2 echo "PostgreSQL is unavailable - sleeping"
-  sleep 1
-done
-
 rm -f /app/tmp/pids/server.pid
 
 if [ "$RAILS_ENV" = "development" ]; then
