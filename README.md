@@ -1,6 +1,9 @@
-# Expense Tracker
+### Currently down due to Render's free tier shutting down the database.
 
-A full-stack web application for managing personal finances with visual budgeting insights. Built with React frontend and Ruby on Rails API backend.
+---
+
+# Expense Tracker
+A full-stack web application for managing personal finances with visual insights. Built with React frontend and Ruby on Rails API backend.
 
 ![Expense Tracker Demo](demo.gif)
 
@@ -94,11 +97,6 @@ docker-compose up --build
 2. **Access using http://localhost:5173**
 
 ---
-
-Live Demo
-Explore the live demo hosted on Vercel:
-👉 https://expense-tracker-three-sable-48.vercel.app/
-
 
 ## Credits
 
